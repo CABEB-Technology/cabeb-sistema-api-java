@@ -19,7 +19,7 @@ public class UsuarioService {
     @Autowired
     private UsuarioRepository repository;
 
-    public Usuario criar(Usuario usuario) {
+    public Usuario criarUsuario(Usuario usuario) {
 
         if (!CpfValidate.isCPF(usuario.getCpf())) throw new BadRequestException("Cpf inválido");
         if (repository.findByEmail(usuario.getEmail()) != null) throw new BadRequestException("E-mail já cadastrado");

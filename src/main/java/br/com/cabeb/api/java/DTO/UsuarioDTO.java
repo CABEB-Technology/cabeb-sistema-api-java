@@ -1,5 +1,6 @@
 package br.com.cabeb.api.java.DTO;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,6 +17,10 @@ public class UsuarioDTO {
     private String senha;
     private String cpf;
 
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDateTime criado;
+
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDateTime modificado;
 }
