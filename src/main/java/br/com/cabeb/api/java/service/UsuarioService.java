@@ -3,6 +3,7 @@ package br.com.cabeb.api.java.service;
 import br.com.cabeb.api.java.entity.Usuario;
 import br.com.cabeb.api.java.exception.BadRequestException;
 import br.com.cabeb.api.java.lib.CpfValidate;
+import br.com.cabeb.api.java.lib.EmailValidate;
 import br.com.cabeb.api.java.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,6 +23,8 @@ public class UsuarioService {
     public Usuario criarUsuario(Usuario usuario) {
 
         if (!CpfValidate.isCPF(usuario.getCpf())) throw new BadRequestException("Cpf inválido");
+        if (!EmailValidate.isEmail(usuario.getEmail())) throw new BadRequestException("E-mail inválido");
+
         if (repository.findByEmail(usuario.getEmail()) != null) throw new BadRequestException("E-mail já cadastrado");
         if (repository.findByUsuario(usuario.getUsuario()) != null) throw new BadRequestException("Usuário já cadastrado");
 
