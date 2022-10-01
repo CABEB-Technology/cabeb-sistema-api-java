@@ -28,6 +28,8 @@ public class UsuarioService {
         if (repository.findByEmail(usuario.getEmail()) != null) throw new BadRequestException("E-mail já cadastrado");
         if (repository.findByUsuario(usuario.getUsuario()) != null) throw new BadRequestException("Usuário já cadastrado");
 
+        if (usuario.getSenha().length() < 8) throw new BadRequestException("Senha deve conter mais de 8 caracteres");
+
         String senhaHash = this.passwordEncoder.encode(usuario.getSenha());
 
         usuario.setSenha(senhaHash);
