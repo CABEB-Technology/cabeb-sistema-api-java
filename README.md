@@ -161,7 +161,7 @@ As seguintes ferramentas/tecnologias foram usadas na construção e teste do pro
         </sub>
     </td>
     <td align="center">
-      <a href="https://github.com/CABEB-Technology">
+      <a href="https://github.com/AdryanNeves">
         <img src="https://media-exp1.licdn.com/dms/image/C4D03AQFImzxAjnaWMg/profile-displayphoto-shrink_800_800/0/1658975694238?e=1669852800&v=beta&t=qw1RlcAmUI3SEOAVO9qvBBEE2xxbXlURpFkXec5v8B8" width="110"/></a><br>
         <sub>
             <a href="https://www.linkedin.com/in/adryan-daniel-0b11461aa/" target="_blank" rel="noreferrer" rel="noopener">
