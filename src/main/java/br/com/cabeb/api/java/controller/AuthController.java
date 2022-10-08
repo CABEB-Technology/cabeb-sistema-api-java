@@ -2,8 +2,8 @@ package br.com.cabeb.api.java.controller;
 
 import br.com.cabeb.api.java.entity.Usuario;
 import br.com.cabeb.api.java.exception.BadRequestException;
-import br.com.cabeb.api.java.security.DTO.JwtRequest;
-import br.com.cabeb.api.java.security.DTO.JwtResponse;
+import br.com.cabeb.api.java.security.DTO.JwtRequestDTO;
+import br.com.cabeb.api.java.security.DTO.JwtResponseDTO;
 import br.com.cabeb.api.java.security.lib.JwtTokenUtil;
 import br.com.cabeb.api.java.security.service.JwtUserDetailsService;
 import br.com.cabeb.api.java.service.UsuarioService;
@@ -36,12 +36,12 @@ public class AuthController {
     private void autenticacao(String email, String senha) throws BadRequestException {
         Usuario usuario = this.usuarioService.buscarUsuarioPorEmail(email);
 
-        if (usuario == null) throw new BadRequestException("E-mail inválido");
+        if (usuario == null) throw new BadRequestException("E-mail não cadastrado");
         if (!passwordEncoder.matches(senha, usuario.getSenha())) throw new BadRequestException("Senha inválida");
     }
 
     @PostMapping
-    public ResponseEntity<JwtResponse> criarAutenticacaoToken(@RequestBody JwtRequest response) {
+    public ResponseEntity<JwtResponseDTO> criarAutenticacaoToken(@RequestBody JwtRequestDTO response) {
         this.autenticacao(response.getEmail(), response.getSenha());
 
         Usuario usuario = this.usuarioService.buscarUsuarioPorEmail(response.getEmail());
@@ -49,8 +49,8 @@ public class AuthController {
         final UserDetails userDetails = userDetailsService.loadUserByUsername(response.getEmail());
         final String token = jwtTokenUtil.generateToken(userDetails);
 
-        JwtResponse jwtResponse = new JwtResponse(token, usuario.getId(), usuario.getUsuario());
+        JwtResponseDTO jwtResponse = new JwtResponseDTO(token, usuario.getId(), usuario.getUsuario());
 
-        return new ResponseEntity<>(jwtResponse, HttpStatus.CREATED);
+        return new ResponseEntity<>(jwtResponse, HttpStatus.OK);
     }
 }

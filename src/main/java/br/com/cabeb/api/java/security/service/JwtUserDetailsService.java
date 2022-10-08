@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
@@ -20,8 +21,6 @@ public class JwtUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) throws NotFoundException {
         Usuario usuario = this.service.buscarUsuarioPorEmail(email);
-
-        if (!usuario.getEmail().equals(email)) throw new NotFoundException("email não encontrado");
 
         return new User(email, usuario.getSenha(), new ArrayList<>());
     }
