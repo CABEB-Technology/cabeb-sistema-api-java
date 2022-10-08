@@ -2,6 +2,7 @@ package br.com.cabeb.api.java.utils;
 
 import br.com.cabeb.api.java.entity.Usuario;
 import br.com.cabeb.api.java.service.UsuarioService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class TestUtils {
@@ -18,5 +19,13 @@ public class TestUtils {
         usuario.setEmail("brendson@gmail.com");
 
         return usuario;
+    }
+
+    public static String asJsonString(final Object obj) {
+        try {
+            return new ObjectMapper().writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 }

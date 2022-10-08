@@ -67,7 +67,7 @@ public class UsuarioUnitTest {
         Usuario usuario = TestUtils.criarUsuario();
 
         // when
-        usuario.setCpf("11111111111");
+        usuario.setCpf("51255973438");
 
         // then
         assertThrows(BadRequestException.class, () -> this.service.criarUsuario(usuario));
@@ -80,6 +80,18 @@ public class UsuarioUnitTest {
 
         // when
         usuario.setEmail("test@");
+
+        // then
+        assertThrows(BadRequestException.class, () -> this.service.criarUsuario(usuario));
+    }
+
+    @Test
+    void deveReceberExcecaoEmailCadastrado() {
+        // given
+        Usuario usuario = TestUtils.criarUsuario();
+
+        // when
+        usuario.setEmail("victor@gmail.com");
 
         // then
         assertThrows(BadRequestException.class, () -> this.service.criarUsuario(usuario));
