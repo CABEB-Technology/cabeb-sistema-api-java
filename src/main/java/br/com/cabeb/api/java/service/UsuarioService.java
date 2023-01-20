@@ -10,6 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 public class UsuarioService {
@@ -44,5 +45,9 @@ public class UsuarioService {
     public Usuario buscarUsuarioPorEmail(String email) {
 
         return this.repository.findByEmail(email);
+    }
+
+    public List<Usuario> obterTodosUsuarios() {
+        return this.repository.findAll();
     }
 }

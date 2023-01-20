@@ -31,7 +31,6 @@ public class WebSecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-
     @Bean
     public BCryptPasswordEncoder bCryptPassword() {
         return new BCryptPasswordEncoder();
@@ -43,7 +42,7 @@ public class WebSecurityConfig {
         http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/swagger-ui/**", "/swagger-resources/**", "/v2/api-docs/**").permitAll()
-                .antMatchers(HttpMethod.POST, "/cadastrar", "/login").permitAll()
+                .antMatchers(HttpMethod.POST, "/usuario", "/login").permitAll()
                 .anyRequest().authenticated()
                 .and().cors()
                 .and().exceptionHandling()
