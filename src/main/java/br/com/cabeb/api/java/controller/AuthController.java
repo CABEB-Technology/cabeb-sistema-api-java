@@ -36,8 +36,8 @@ public class AuthController {
     private void autenticacao(String email, String senha) throws BadRequestException {
         Usuario usuario = this.usuarioService.buscarUsuarioPorEmail(email);
 
-        if (usuario == null) throw new BadRequestException("E-mail não cadastrado");
-        if (!passwordEncoder.matches(senha, usuario.getSenha())) throw new BadRequestException("Senha inválida");
+        if (usuario == null) throw new BadRequestException("E-mail ou Senha inválida");
+        if (!passwordEncoder.matches(senha, usuario.getSenha())) throw new BadRequestException("E-mail ou Senha inválida");
     }
 
     @PostMapping

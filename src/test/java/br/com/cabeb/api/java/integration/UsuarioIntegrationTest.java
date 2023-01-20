@@ -66,7 +66,7 @@ public class UsuarioIntegrationTest {
         Usuario usuario = TestUtils.criarUsuario();
         UsuarioDTO usuarioDTO = this.toUsuarioDto(usuario);
 
-        RequestBuilder request = MockMvcRequestBuilders.post("/cadastrar")
+        RequestBuilder request = MockMvcRequestBuilders.post("/usuario")
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
                 .content(TestUtils.asJsonString(usuarioDTO))
                 .accept(MediaType.APPLICATION_JSON);
