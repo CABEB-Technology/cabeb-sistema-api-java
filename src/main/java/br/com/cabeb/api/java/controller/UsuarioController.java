@@ -32,7 +32,7 @@ public class UsuarioController {
         Usuario usuario = this.modelMapper.map(usuarioDTO, Usuario.class);
         usuario = this.service.criarUsuario(usuario);
 
-        return new ResponseEntity<UsuarioDTO>(toUsuarioDTO(usuario), HttpStatus.CREATED);
+        return new ResponseEntity<>(toUsuarioDTO(usuario), HttpStatus.CREATED);
     }
 
     @GetMapping
@@ -41,5 +41,18 @@ public class UsuarioController {
                 .stream()
                 .map(this::toUsuarioDTO)
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<UsuarioDTO> obterUsuario(@PathVariable Long id) {
+        Usuario usuario = this.service.obterUsuarioPorId(id);
+        return new ResponseEntity<>(toUsuarioDTO(usuario), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<HttpStatus> deletarUsuario(@PathVariable Long id) {
+        this.service.deletarUsuario(id);
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
