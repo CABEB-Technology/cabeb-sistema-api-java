@@ -5,8 +5,7 @@ import br.com.cabeb.api.java.exception.BadRequestException;
 import br.com.cabeb.api.java.lib.CpfValidate;
 import br.com.cabeb.api.java.lib.EmailValidate;
 import br.com.cabeb.api.java.repository.UsuarioRepository;
-import org.joda.time.LocalDate;
-import org.springframework.beans.factory.annotation.Autowired;
+import br.com.cabeb.api.java.service.impl.IUsuarioService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -15,13 +14,19 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UsuarioService {
+public class UsuarioService implements IUsuarioService {
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final PasswordEncoder passwordEncoder;
+    private final UsuarioRepository repository;
 
-    @Autowired
-    private UsuarioRepository repository;
+    public UsuarioService(PasswordEncoder passwordEncoder, UsuarioRepository repository) {
+        this.passwordEncoder = passwordEncoder;
+        this.repository = repository;
+    }
+
+    public String encryptarSenha(String senha) {
+        return this.passwordEncoder.encode(senha);
+    }
 
     public Usuario criarUsuario(Usuario usuario) {
 
@@ -33,9 +38,7 @@ public class UsuarioService {
 
         if (usuario.getSenha().length() < 8) throw new BadRequestException("Senha deve conter mais de 8 caracteres");
 
-        String senhaHash = this.passwordEncoder.encode(usuario.getSenha());
-
-        usuario.setSenha(senhaHash);
+        usuario.setSenha(this.encryptarSenha(usuario.getSenha()));
 
         usuario.setCpf(CpfValidate.formatarCPF(usuario.getCpf()));
         usuario.setCriado(LocalDateTime.now());
@@ -44,7 +47,7 @@ public class UsuarioService {
         return this.repository.save(usuario);
     }
 
-    public Usuario buscarUsuarioPorEmail(String email) {
+    public Usuario obterUsuarioPorEmail(String email) {
 
         return this.repository.findByEmail(email);
     }
