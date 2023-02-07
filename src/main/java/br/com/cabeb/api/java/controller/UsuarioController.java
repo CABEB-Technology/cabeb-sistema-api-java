@@ -3,8 +3,8 @@ package br.com.cabeb.api.java.controller;
 import br.com.cabeb.api.java.DTO.UsuarioDTO;
 import br.com.cabeb.api.java.entity.Usuario;
 import br.com.cabeb.api.java.service.UsuarioService;
+import br.com.cabeb.api.java.service.impl.IUsuarioService;
 import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,11 +16,13 @@ import java.util.stream.Collectors;
 @RequestMapping("/usuario")
 public class UsuarioController {
 
-    @Autowired
-    private UsuarioService service;
+    private final IUsuarioService service;
+    private final ModelMapper modelMapper;
 
-    @Autowired
-    private ModelMapper modelMapper;
+    public UsuarioController(UsuarioService service, ModelMapper modelMapper) {
+        this.service = service;
+        this.modelMapper = modelMapper;
+    }
 
     private UsuarioDTO toUsuarioDTO(Usuario usuario) {
         return this.modelMapper.map(usuario, UsuarioDTO.class);
@@ -52,7 +54,6 @@ public class UsuarioController {
     @DeleteMapping("/{id}")
     public ResponseEntity<HttpStatus> deletarUsuario(@PathVariable Long id) {
         this.service.deletarUsuario(id);
-
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

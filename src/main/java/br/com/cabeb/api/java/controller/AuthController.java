@@ -7,7 +7,7 @@ import br.com.cabeb.api.java.security.DTO.JwtResponseDTO;
 import br.com.cabeb.api.java.security.lib.JwtTokenUtil;
 import br.com.cabeb.api.java.security.service.JwtUserDetailsService;
 import br.com.cabeb.api.java.service.UsuarioService;
-import org.springframework.beans.factory.annotation.Autowired;
+import br.com.cabeb.api.java.service.impl.IUsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,30 +21,30 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/login")
 public class AuthController {
 
-    @Autowired
-    private JwtTokenUtil jwtTokenUtil;
+    private final JwtTokenUtil jwtTokenUtil;
+    private final JwtUserDetailsService userDetailsService;
+    private final PasswordEncoder passwordEncoder;
+    private final IUsuarioService usuarioService;
 
-    @Autowired
-    private JwtUserDetailsService userDetailsService;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
-    private UsuarioService usuarioService;
+    public AuthController(JwtTokenUtil jwtTokenUtil, JwtUserDetailsService userDetailsService, PasswordEncoder passwordEncoder, UsuarioService usuarioService) {
+        this.jwtTokenUtil = jwtTokenUtil;
+        this.userDetailsService = userDetailsService;
+        this.passwordEncoder = passwordEncoder;
+        this.usuarioService = usuarioService;
+    }
 
     private void autenticacao(String email, String senha) throws BadRequestException {
-        Usuario usuario = this.usuarioService.buscarUsuarioPorEmail(email);
+        Usuario usuario = this.usuarioService.obterUsuarioPorEmail(email);
 
-        if (usuario == null) throw new BadRequestException("E-mail ou Senha inválida");
-        if (!passwordEncoder.matches(senha, usuario.getSenha())) throw new BadRequestException("E-mail ou Senha inválida");
+        if (usuario == null) throw new BadRequestException("E-mail ou Senha inválidos");
+        if (!passwordEncoder.matches(senha, usuario.getSenha())) throw new BadRequestException("E-mail ou Senha inválidos");
     }
 
     @PostMapping
     public ResponseEntity<JwtResponseDTO> criarAutenticacaoToken(@RequestBody JwtRequestDTO response) {
         this.autenticacao(response.getEmail(), response.getSenha());
 
-        Usuario usuario = this.usuarioService.buscarUsuarioPorEmail(response.getEmail());
+        Usuario usuario = this.usuarioService.obterUsuarioPorEmail(response.getEmail());
 
         final UserDetails userDetails = userDetailsService.loadUserByUsername(response.getEmail());
         final String token = jwtTokenUtil.generateToken(userDetails);
