@@ -13,13 +13,14 @@ import javax.persistence.*;
 @Getter @Setter
 @NoArgsConstructor
 @AuditOverride(forClass = AbstractModel.class)
-public class Usuario extends AbstractModel {
+public class Equipe extends AbstractModel {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_seq")
-    @SequenceGenerator(name = "user_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "equipe_seq")
+    @SequenceGenerator(name = "equipe_seq", allocationSize = 1)
     private Long id;
 
-    private String usuario;
-    private String senha;
+    private Integer cargaHoraria;
+    private String equipe;
 }
+ 
