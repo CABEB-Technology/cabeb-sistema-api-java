@@ -14,41 +14,36 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/usuario")
-public class UsuarioController {
+public class UsuarioController extends AbstractController {
 
     private final IUsuarioService service;
-    private final ModelMapper modelMapper;
 
-    public UsuarioController(UsuarioService service, ModelMapper modelMapper) {
+    public UsuarioController(IUsuarioService service, ModelMapper modelMapper) {
+        super(modelMapper);
         this.service = service;
-        this.modelMapper = modelMapper;
-    }
-
-    private UsuarioDTO toUsuarioDTO(Usuario usuario) {
-        return this.modelMapper.map(usuario, UsuarioDTO.class);
     }
 
     @PostMapping
     public ResponseEntity<UsuarioDTO> criarUsuario(@RequestBody UsuarioDTO usuarioDTO) {
 
-        Usuario usuario = this.modelMapper.map(usuarioDTO, Usuario.class);
+        Usuario usuario = this.map(usuarioDTO, Usuario.class);
         usuario = this.service.criarUsuario(usuario);
 
-        return new ResponseEntity<>(toUsuarioDTO(usuario), HttpStatus.CREATED);
+        return new ResponseEntity<>(this.map(usuario, UsuarioDTO.class), HttpStatus.CREATED);
     }
 
     @GetMapping
     public List<UsuarioDTO> obterTodosUsuarios() {
         return this.service.obterTodosUsuarios()
                 .stream()
-                .map(this::toUsuarioDTO)
+                .map(usuario -> map(usuario, UsuarioDTO.class))
                 .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<UsuarioDTO> obterUsuario(@PathVariable Long id) {
         Usuario usuario = this.service.obterUsuarioPorId(id);
-        return new ResponseEntity<>(toUsuarioDTO(usuario), HttpStatus.OK);
+        return new ResponseEntity<>(this.map(usuario, UsuarioDTO.class), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")

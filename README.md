@@ -1,4 +1,4 @@
-# 🔒 api autenticação cabeb sistema [<img align="right" src="https://img.shields.io/badge/release-v0.0.1-green">](https://github.com/CABEB-Technology/cabeb-sistema-api-java/releases)
+# 📦 api cabeb sistema [<img align="right" src="https://img.shields.io/badge/release-v0.0.1-green">](https://github.com/CABEB-Technology/cabeb-sistema-api-java/releases)
 
 Bem-vindo(a).
 
