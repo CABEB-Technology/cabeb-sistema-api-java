@@ -1,4 +1,4 @@
-package br.com.cabeb.api.java.exception;
+package br.com.cabeb.api.java.exception.message;
 
 import lombok.Getter;
 

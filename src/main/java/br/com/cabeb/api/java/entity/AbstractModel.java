@@ -8,8 +8,9 @@ import java.time.LocalDateTime;
 
 @Getter @Setter
 @MappedSuperclass
-public class AbstractModel {
+public abstract class AbstractModel {
 
+    private String nome;
     private String cpf;
     private String email;
     private String matricula;

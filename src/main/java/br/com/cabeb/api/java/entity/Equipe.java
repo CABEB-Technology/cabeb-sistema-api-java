@@ -21,6 +21,9 @@ public class Equipe extends AbstractModel {
     private Long id;
 
     private Integer cargaHoraria;
-    private String equipe;
+
+    @ManyToOne
+    @JoinColumn(name = "perfil_equipe_id")
+    private PerfilEquipe perfilEquipe;
 }
  

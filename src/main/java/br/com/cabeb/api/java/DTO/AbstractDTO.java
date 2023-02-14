@@ -10,12 +10,14 @@ import java.time.LocalDateTime;
 public abstract class AbstractDTO {
     private Long id;
 
+    private String nome;
     private String cpf;
     private String email;
     private String matricula;
     private String endereco;
     private String Telefone;
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private LocalDateTime dataNascimento;
 
     @JsonFormat(pattern = "dd/MM/yyyy")

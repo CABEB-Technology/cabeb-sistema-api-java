@@ -2,8 +2,7 @@ package br.com.cabeb.api.java.controller;
 
 import br.com.cabeb.api.java.DTO.UsuarioDTO;
 import br.com.cabeb.api.java.entity.Usuario;
-import br.com.cabeb.api.java.service.UsuarioService;
-import br.com.cabeb.api.java.service.impl.IUsuarioService;
+import br.com.cabeb.api.java.service.IUsuarioService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,5 +1,6 @@
 package br.com.cabeb.api.java.DTO;
 
+import br.com.cabeb.api.java.entity.PerfilEquipe;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,5 +8,5 @@ import lombok.Setter;
 public class EquipeDTO extends AbstractDTO {
 
     private Integer cargaHoraria;
-    private String equipe;
+    private PerfilEquipe perfilEquipe;
 }

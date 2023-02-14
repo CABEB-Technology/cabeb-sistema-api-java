@@ -4,7 +4,7 @@ import br.com.cabeb.api.java.DTO.UsuarioDTO;
 import br.com.cabeb.api.java.entity.Usuario;
 import br.com.cabeb.api.java.repository.UsuarioRepository;
 import br.com.cabeb.api.java.security.DTO.JwtRequestDTO;
-import br.com.cabeb.api.java.service.UsuarioService;
+import br.com.cabeb.api.java.service.impl.UsuarioServiceImpl;
 import br.com.cabeb.api.java.utils.TestUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,7 +35,7 @@ public class UsuarioIntegrationTest {
     private ModelMapper modelMapper;
 
     @Autowired
-    private UsuarioService service;
+    private UsuarioServiceImpl service;
 
     @Autowired
     private UsuarioRepository repository;

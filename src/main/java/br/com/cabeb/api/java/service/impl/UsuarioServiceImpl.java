@@ -1,11 +1,11 @@
-package br.com.cabeb.api.java.service;
+package br.com.cabeb.api.java.service.impl;
 
 import br.com.cabeb.api.java.entity.Usuario;
 import br.com.cabeb.api.java.exception.BadRequestException;
 import br.com.cabeb.api.java.lib.CpfValidate;
 import br.com.cabeb.api.java.lib.EmailValidate;
 import br.com.cabeb.api.java.repository.UsuarioRepository;
-import br.com.cabeb.api.java.service.impl.IUsuarioService;
+import br.com.cabeb.api.java.service.IUsuarioService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,12 +14,12 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UsuarioService implements IUsuarioService {
+public class UsuarioServiceImpl implements IUsuarioService {
 
     private final PasswordEncoder passwordEncoder;
     private final UsuarioRepository repository;
 
-    public UsuarioService(PasswordEncoder passwordEncoder, UsuarioRepository repository) {
+    public UsuarioServiceImpl(PasswordEncoder passwordEncoder, UsuarioRepository repository) {
         this.passwordEncoder = passwordEncoder;
         this.repository = repository;
     }
@@ -28,6 +28,7 @@ public class UsuarioService implements IUsuarioService {
         return this.passwordEncoder.encode(senha);
     }
 
+    @Override
     public Usuario criarUsuario(Usuario usuario) {
 
         if (!CpfValidate.isCPF(usuario.getCpf())) throw new BadRequestException("Cpf inválido");
@@ -47,17 +48,20 @@ public class UsuarioService implements IUsuarioService {
         return this.repository.save(usuario);
     }
 
+    @Override
     public Usuario obterUsuarioPorEmail(String email) {
 
         return this.repository.findByEmail(email);
     }
 
+    @Override
     public Usuario obterUsuarioPorId(Long id) {
         Optional<Usuario> usuario = this.repository.findById(id);
 
         return usuario.orElseThrow(() -> new BadRequestException("Usuário não encontrado"));
     }
 
+    @Override
     public List<Usuario> obterTodosUsuarios() {
         return this.repository.findAll();
     }

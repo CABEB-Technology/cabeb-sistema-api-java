@@ -3,7 +3,7 @@ package br.com.cabeb.api.java.unit;
 import br.com.cabeb.api.java.entity.Usuario;
 import br.com.cabeb.api.java.exception.BadRequestException;
 import br.com.cabeb.api.java.repository.UsuarioRepository;
-import br.com.cabeb.api.java.service.UsuarioService;
+import br.com.cabeb.api.java.service.impl.UsuarioServiceImpl;
 import br.com.cabeb.api.java.utils.TestUtils;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class UsuarioUnitTest {
 
     @Autowired
-    private UsuarioService service;
+    private UsuarioServiceImpl service;
 
     @Autowired
     private UsuarioRepository repository;

@@ -1,14 +1,14 @@
 package br.com.cabeb.api.java.utils;
 
 import br.com.cabeb.api.java.entity.Usuario;
-import br.com.cabeb.api.java.service.UsuarioService;
+import br.com.cabeb.api.java.service.impl.UsuarioServiceImpl;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class TestUtils {
 
     @Autowired
-    private UsuarioService service;
+    private UsuarioServiceImpl service;
 
     public static Usuario criarUsuario() {
         Usuario usuario = new Usuario();
