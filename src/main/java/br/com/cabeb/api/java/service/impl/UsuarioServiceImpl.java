@@ -2,6 +2,7 @@ package br.com.cabeb.api.java.service.impl;
 
 import br.com.cabeb.api.java.entity.Usuario;
 import br.com.cabeb.api.java.exception.BadRequestException;
+import br.com.cabeb.api.java.exception.NotFoundException;
 import br.com.cabeb.api.java.lib.CpfValidate;
 import br.com.cabeb.api.java.lib.EmailValidate;
 import br.com.cabeb.api.java.repository.UsuarioRepository;
@@ -57,8 +58,7 @@ public class UsuarioServiceImpl implements IUsuarioService {
     @Override
     public Usuario obterUsuarioPorId(Long id) {
         Optional<Usuario> usuario = this.repository.findById(id);
-
-        return usuario.orElseThrow(() -> new BadRequestException("Usuário não encontrado"));
+        return usuario.orElseThrow(() -> new NotFoundException("Usuário não encontrado"));
     }
 
     @Override

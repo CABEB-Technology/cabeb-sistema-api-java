@@ -1,7 +1,9 @@
 package br.com.cabeb.api.java.controller;
 
 import br.com.cabeb.api.java.DTO.EquipeDTO;
+import br.com.cabeb.api.java.DTO.UsuarioDTO;
 import br.com.cabeb.api.java.entity.Equipe;
+import br.com.cabeb.api.java.entity.Usuario;
 import br.com.cabeb.api.java.service.IEquipeService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -28,6 +30,12 @@ public class EquipeController extends AbstractController {
                 .stream()
                 .map(equipe -> map(equipe, EquipeDTO.class))
                 .collect(Collectors.toList());
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<EquipeDTO> obterIntegrantePorId(@PathVariable Long id) {
+        Equipe integrante = this.service.bucarIntegrantePorId(id);
+        return new ResponseEntity<>(this.map(integrante, EquipeDTO.class), HttpStatus.OK);
     }
 
     @PostMapping

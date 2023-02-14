@@ -8,4 +8,5 @@ public interface IEquipeService {
 
     List<Equipe> obterTodasEquipes(Long id);
     Equipe criarIntegranteEquipe(Equipe integrante);
+    Equipe bucarIntegrantePorId(Long id);
 }
