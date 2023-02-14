@@ -1,4 +1,4 @@
-package br.com.cabeb.api.java.controller;
+package br.com.cabeb.api.java.security.rest;
 
 import br.com.cabeb.api.java.entity.Usuario;
 import br.com.cabeb.api.java.exception.BadRequestException;
@@ -6,8 +6,8 @@ import br.com.cabeb.api.java.security.DTO.JwtRequestDTO;
 import br.com.cabeb.api.java.security.DTO.JwtResponseDTO;
 import br.com.cabeb.api.java.security.lib.JwtTokenUtil;
 import br.com.cabeb.api.java.security.service.JwtUserDetailsService;
-import br.com.cabeb.api.java.service.UsuarioService;
-import br.com.cabeb.api.java.service.impl.IUsuarioService;
+import br.com.cabeb.api.java.service.impl.UsuarioServiceImpl;
+import br.com.cabeb.api.java.service.IUsuarioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,7 +26,7 @@ public class AuthController {
     private final PasswordEncoder passwordEncoder;
     private final IUsuarioService usuarioService;
 
-    public AuthController(JwtTokenUtil jwtTokenUtil, JwtUserDetailsService userDetailsService, PasswordEncoder passwordEncoder, UsuarioService usuarioService) {
+    public AuthController(JwtTokenUtil jwtTokenUtil, JwtUserDetailsService userDetailsService, PasswordEncoder passwordEncoder, UsuarioServiceImpl usuarioService) {
         this.jwtTokenUtil = jwtTokenUtil;
         this.userDetailsService = userDetailsService;
         this.passwordEncoder = passwordEncoder;

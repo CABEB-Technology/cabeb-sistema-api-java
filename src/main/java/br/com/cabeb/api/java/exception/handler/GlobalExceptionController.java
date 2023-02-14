@@ -1,7 +1,7 @@
-package br.com.cabeb.api.java.controller;
+package br.com.cabeb.api.java.exception.handler;
 
 import br.com.cabeb.api.java.exception.BadRequestException;
-import br.com.cabeb.api.java.exception.ErrorMessage;
+import br.com.cabeb.api.java.exception.message.ErrorMessage;
 import br.com.cabeb.api.java.exception.NotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

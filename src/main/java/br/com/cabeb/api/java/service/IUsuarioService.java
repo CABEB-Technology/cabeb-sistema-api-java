@@ -1,4 +1,4 @@
-package br.com.cabeb.api.java.service.impl;
+package br.com.cabeb.api.java.service;
 
 import br.com.cabeb.api.java.entity.Usuario;
 
