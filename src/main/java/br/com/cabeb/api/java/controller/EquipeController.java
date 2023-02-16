@@ -1,9 +1,7 @@
 package br.com.cabeb.api.java.controller;
 
 import br.com.cabeb.api.java.DTO.EquipeDTO;
-import br.com.cabeb.api.java.DTO.UsuarioDTO;
 import br.com.cabeb.api.java.entity.Equipe;
-import br.com.cabeb.api.java.entity.Usuario;
 import br.com.cabeb.api.java.service.IEquipeService;
 import org.modelmapper.ModelMapper;
 import org.springframework.http.HttpStatus;
@@ -24,6 +22,15 @@ public class EquipeController extends AbstractController {
         this.service = service;
     }
 
+    @PostMapping
+    public ResponseEntity<EquipeDTO> criarIntegranteEquipe(@RequestBody EquipeDTO integranteDTO) {
+
+        Equipe integrante = this.map(integranteDTO, Equipe.class);
+        integrante = this.service.criarIntegranteEquipe(integrante);
+
+        return new ResponseEntity<>(this.map(integrante, EquipeDTO.class), HttpStatus.CREATED);
+    }
+
     @GetMapping("/integrantes/{perfilId}")
     public List<EquipeDTO> obterTodasEquipes(@PathVariable Long perfilId) {
         return this.service.obterTodasEquipes(perfilId)
@@ -38,12 +45,18 @@ public class EquipeController extends AbstractController {
         return new ResponseEntity<>(this.map(integrante, EquipeDTO.class), HttpStatus.OK);
     }
 
-    @PostMapping
-    public ResponseEntity<EquipeDTO> criarIntegranteEquipe(@RequestBody EquipeDTO integranteDTO) {
+    @PutMapping("/{id}")
+    public ResponseEntity<EquipeDTO> atualizarIntegrante(@PathVariable Long id, @RequestBody EquipeDTO integranteDTO) {
 
         Equipe integrante = this.map(integranteDTO, Equipe.class);
-        integrante = this.service.criarIntegranteEquipe(integrante);
+        integrante = this.service.atualizarIntegrante(id, integrante);
 
-        return new ResponseEntity<>(this.map(integrante, EquipeDTO.class), HttpStatus.CREATED);
+        return new ResponseEntity<>(this.map(integrante, EquipeDTO.class), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<HttpStatus> deletarIntegrante(@PathVariable Long id) {
+        this.service.deletarIntegrante(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
