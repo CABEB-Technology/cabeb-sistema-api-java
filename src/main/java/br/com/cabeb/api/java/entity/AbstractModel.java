@@ -1,9 +1,11 @@
 package br.com.cabeb.api.java.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.MappedSuperclass;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter @Setter
@@ -17,7 +19,8 @@ public abstract class AbstractModel {
     private String endereco;
     private String Telefone;
 
-    private LocalDateTime dataNascimento;
+    @JsonFormat(pattern="dd/MM/yyyy")
+    private LocalDate dataNascimento;
     private LocalDateTime criado;
     private LocalDateTime modificado;
 }

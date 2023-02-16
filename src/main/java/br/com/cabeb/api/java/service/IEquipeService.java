@@ -7,5 +7,8 @@ import java.util.List;
 public interface IEquipeService {
 
     List<Equipe> obterTodasEquipes(Long id);
-    Equipe criarIntegranteEquipe(Equipe integrante);
+    Equipe criarIntegranteEquipe(Equipe novoIntegrante);
+    Equipe bucarIntegrantePorId(Long id);
+    Equipe atualizarIntegrante(Long id, Equipe integranteAtualizado);
+    void deletarIntegrante(Long id);
 }
