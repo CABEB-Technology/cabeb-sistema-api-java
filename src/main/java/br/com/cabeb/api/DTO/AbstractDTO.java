@@ -15,11 +15,13 @@ public abstract class AbstractDTO {
     private String cpf;
     private String email;
     private String matricula;
-    private String endereco;
     private String telefone;
 
-    private LocalDate dataNascimento;
+    private String cep;
+    private String endereco;
 
     @JsonFormat(pattern = "dd/MM/yyyy")
+    private LocalDate dataNascimento;
+
     private LocalDateTime modificado;
 }
