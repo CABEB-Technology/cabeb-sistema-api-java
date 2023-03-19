@@ -15,10 +15,13 @@ public abstract class AbstractModel {
     private String cpf;
     private String email;
     private String matricula;
-    private String endereco;
     private String telefone;
 
+    private String cep;
+    private String endereco;
+
     private LocalDate dataNascimento;
+
     private LocalDateTime criado;
     private LocalDateTime modificado;
 }

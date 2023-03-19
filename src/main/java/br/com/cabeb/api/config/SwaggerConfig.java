@@ -23,7 +23,7 @@ public class SwaggerConfig implements WebMvcConfigurer {
         return new Docket(DocumentationType.SWAGGER_2)
                 .securityContexts(Collections.singletonList(securityContext()))
                 .securitySchemes(List.of(apiKey())).select()
-                .apis(RequestHandlerSelectors.basePackage("br.com.cabeb.api.java"))
+                .apis(RequestHandlerSelectors.basePackage("br.com.cabeb.api"))
                 .paths(PathSelectors.regex("/api.*"))
                 .build().apiInfo(apiInfoMetaData());
     }
