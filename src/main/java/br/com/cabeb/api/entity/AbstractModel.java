@@ -18,6 +18,7 @@ public abstract class AbstractModel {
     private String telefone;
 
     private String cep;
+    private String numero;
     private String endereco;
 
     private LocalDate dataNascimento;

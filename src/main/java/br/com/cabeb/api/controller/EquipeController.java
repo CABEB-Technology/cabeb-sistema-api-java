@@ -1,6 +1,7 @@
 package br.com.cabeb.api.controller;
 
 import br.com.cabeb.api.DTO.EquipeDTO;
+import br.com.cabeb.api.DTO.PerfilEquipeDTO;
 import br.com.cabeb.api.entity.Equipe;
 import br.com.cabeb.api.service.EquipeService;
 import org.modelmapper.ModelMapper;
@@ -29,6 +30,14 @@ public class EquipeController extends AbstractController {
         integrante = this.service.criarIntegranteEquipe(integrante);
 
         return new ResponseEntity<>(this.map(integrante, EquipeDTO.class), HttpStatus.CREATED);
+    }
+
+    @GetMapping("/perfis")
+    public List<PerfilEquipeDTO> obterTodasEquipes() {
+        return this.service.obterTodosPerfis()
+                .stream()
+                .map(perfilEquipe -> map(perfilEquipe, PerfilEquipeDTO.class))
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/integrantes/{perfilId}")

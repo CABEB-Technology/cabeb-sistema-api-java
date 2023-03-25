@@ -18,6 +18,7 @@ public abstract class AbstractDTO {
     private String telefone;
 
     private String cep;
+    private String numero;
     private String endereco;
 
     @JsonFormat(pattern = "dd/MM/yyyy")

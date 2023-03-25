@@ -1,9 +1,11 @@
 package br.com.cabeb.api.service.impl;
 
 import br.com.cabeb.api.entity.Equipe;
+import br.com.cabeb.api.entity.PerfilEquipe;
 import br.com.cabeb.api.exception.NotFoundException;
 import br.com.cabeb.api.lib.Validar;
 import br.com.cabeb.api.repository.EquipeRepository;
+import br.com.cabeb.api.repository.PerfilRepository;
 import br.com.cabeb.api.service.EquipeService;
 import org.springframework.stereotype.Service;
 
@@ -14,15 +16,22 @@ import java.util.Optional;
 @Service
 public class EquipeServiceImpl implements EquipeService {
 
+    private final PerfilRepository perfilRepository;
     private final EquipeRepository repository;
 
-    public EquipeServiceImpl(EquipeRepository repository) {
+    public EquipeServiceImpl(PerfilRepository perfilRepository, EquipeRepository repository) {
+        this.perfilRepository = perfilRepository;
         this.repository = repository;
     }
 
     @Override
     public List<Equipe> obterTodasEquipes(Long id) {
         return this.repository.findAllByPerfilEquipe_Id(id);
+    }
+
+    @Override
+    public List<PerfilEquipe> obterTodosPerfis() {
+        return this.perfilRepository.findAll();
     }
 
     @Override
@@ -47,16 +56,18 @@ public class EquipeServiceImpl implements EquipeService {
         Validar.validarObjeto(integranteAtualizado);
         Equipe integrante = this.bucarIntegrantePorId(id);
 
-        integrante.setNome(integranteAtualizado.getNome());
         integrante.setCpf(integranteAtualizado.getCpf());
+        integrante.setCep(integranteAtualizado.getCep());
+        integrante.setNome(integranteAtualizado.getNome());
         integrante.setEmail(integranteAtualizado.getEmail());
-        integrante.setMatricula(integranteAtualizado.getMatricula());
+        integrante.setNumero(integranteAtualizado.getNumero());
         integrante.setEndereco(integranteAtualizado.getEndereco());
         integrante.setTelefone(integranteAtualizado.getTelefone());
+        integrante.setMatricula(integranteAtualizado.getMatricula());
         integrante.setCargaHoraria(integranteAtualizado.getCargaHoraria());
         integrante.setPerfilEquipe(integranteAtualizado.getPerfilEquipe());
-
         integrante.setDataNascimento(integranteAtualizado.getDataNascimento());
+
         integrante.setModificado(LocalDateTime.now());
 
         return this.repository.save(integrante);
